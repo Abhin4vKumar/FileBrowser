@@ -4,12 +4,17 @@
   "private": true,
   "dependencies": {
     "@electron/remote": "^2.1.2",
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
     "electron": "^30.1.0",
+    "electron-builder": "^25.0.0-alpha.9",
+    "electron-is-dev": "^3.0.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
@@ -24,8 +29,21 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "electron:serve": "concurrently -k \"cross-env BROWSER=none npm start\" \"npm electron:start\"",
-    "electron:build": "",
+    "electron:build": "npm build && electron-builder -c.extraMetadata.main=build/main.js",
     "electron:start": "wait-on tcp:3000 && electron ."
+  },
+  "build":{
+    "extends":null,
+    "appId" : "com.example.electron-cra",
+    "files":[
+      "dist/**/*",
+      "build/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "directories":{
+      "buildResources":"assets"
+    }
   },
   "eslintConfig": {
     "extends": [
